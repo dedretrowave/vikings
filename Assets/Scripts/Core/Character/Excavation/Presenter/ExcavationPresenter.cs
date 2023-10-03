@@ -1,7 +1,5 @@
-using System;
 using System.Threading.Tasks;
 using Core.Character.Excavation.View;
-using Core.Excavation.Resource;
 using Core.Excavation.Site.View;
 
 namespace Core.Character.Excavation.Presenter
@@ -17,11 +15,13 @@ namespace Core.Character.Excavation.Presenter
             _view = view;
 
             _view.FoundSite += OnFoundSite;
+            _view.LeftSite += OnLeftSite;
         }
 
         ~ExcavationPresenter()
         {
             _view.FoundSite -= OnFoundSite;
+            _view.LeftSite -= OnLeftSite;
         }
 
         private void OnFoundSite(ExcavationSiteView site)
@@ -30,12 +30,25 @@ namespace Core.Character.Excavation.Presenter
             MineContinuously();
         }
 
+        private void OnLeftSite(ExcavationSiteView site)
+        {
+            if (site.Equals(_currentSite))
+            {
+                _currentSite = null;
+            }
+        }
+
         private async void MineContinuously()
         {
             try
             {
+                if (_currentSite == null)
+                {
+                    return;
+                }
+                
                 _currentSite.OnTryMine();
-                await Task.Delay(1000);
+                await Task.Delay(GlobalSettings.DELAY_BETWEEN_MINE_INTERACTION_IN_MSECS);
                 MineContinuously();
             }
             catch

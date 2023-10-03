@@ -17,12 +17,12 @@ namespace Core.Excavation.Site.View
             TryMine?.Invoke();
         }
 
-        public void Mine(Resource.Resource resource)
+        public void Mine(Resources.Resource.Resource resource)
         {
             Spawn(resource);
         }
 
-        public void Spawn(Resource.Resource resource)
+        public void Spawn(Resources.Resource.Resource resource)
         {
             Vector3 place = new(
                 Random.Range(-_propsSpawnOffsetX, _propsSpawnOffsetX),

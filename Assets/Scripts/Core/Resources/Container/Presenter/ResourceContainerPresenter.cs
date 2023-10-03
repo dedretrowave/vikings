@@ -1,7 +1,7 @@
-using Core.Excavation.Container.Model;
-using Core.Excavation.Container.View;
+using Core.Resources.Container.Model;
+using Core.Resources.Container.View;
 
-namespace Core.Excavation.Container.Presenter
+namespace Core.Resources.Container.Presenter
 {
     public class ResourceContainerPresenter
     {
@@ -16,9 +16,19 @@ namespace Core.Excavation.Container.Presenter
             _view = view;
         }
 
-        public void Add(Resource.Resource resource)
+        public void Add(Resources.Resource.Resource resource)
         {
             _model.Add(resource);
+            _view.Clear();
+            _model.ForEach((resource, amount) =>
+            {
+                _view.Draw(resource, amount);
+            });
+        }
+
+        public void Reduce(Resource.Resource resource)
+        {
+            _model.Decrease(resource);
             _view.Clear();
             _model.ForEach((resource, amount) =>
             {

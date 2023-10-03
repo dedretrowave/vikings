@@ -1,15 +1,14 @@
 using System;
-using Core.Excavation.Resource;
 using UnityEngine;
 
 namespace Core.Excavation.Site.Model
 {
     public class ExcavationSiteModel
     {
-        private Resource.Resource _resource;
+        private Resources.Resource.Resource _resource;
         private int _amount;
         
-        public Resource.Resource Resource => _resource;
+        public Resources.Resource.Resource Resource => _resource;
         public int Amount => _amount;
 
         public ExcavationSiteModel(ExcavationSiteSettings settings)
@@ -35,10 +34,10 @@ namespace Core.Excavation.Site.Model
     [Serializable]
     public class ExcavationSiteSettings
     {
-        [SerializeField] private Resource.Resource _resource;
+        [SerializeField] private Resources.Resource.Resource _resource;
         [SerializeField] private int _amount;
         
-        public Resource.Resource Resource => _resource;
+        public Resources.Resource.Resource Resource => _resource;
         public int Amount => _amount;
     }
 }

@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Core.Excavation.Resource
+namespace Core.Resources.Resource
 {
     public class ResourceUI : MonoBehaviour
     {

@@ -1,10 +1,9 @@
 using System.Collections.Generic;
-using Core.Excavation.Resource;
-using TMPro;
+using Core.Resources.Resource;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Core.Excavation.Container.View
+namespace Core.Resources.Container.View
 {
     public class ResourceContainerView : MonoBehaviour
     {
@@ -19,7 +18,7 @@ namespace Core.Excavation.Container.View
             _uis.Clear();
         }
 
-        public void Draw(Resource.Resource resource, int amount)
+        public void Draw(Resources.Resource.Resource resource, int amount)
         {
             ResourceUI ui = Instantiate(_uiPrefab, _layout.transform);
             

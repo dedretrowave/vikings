@@ -1,7 +1,5 @@
-using System;
-using Core;
-using Core.Excavation;
 using Core.Player;
+using Core.Resources;
 using UnityEngine;
 
 namespace Scenes
@@ -9,9 +7,9 @@ namespace Scenes
     public class TestScene : MonoBehaviour
     {
         [SerializeField] private PlayerInstaller _player;
-        [SerializeField] private ExcavationInstaller _excavation;
+        [SerializeField] private ResourcesInstaller _excavation;
 
-        private void Start()
+        private void Awake()
         {
             _player.Construct();
             _excavation.Construct();

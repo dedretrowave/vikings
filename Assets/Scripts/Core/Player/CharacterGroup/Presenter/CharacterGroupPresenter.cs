@@ -16,8 +16,17 @@ namespace Core.Player.CharacterGroup.Presenter
         public void Add(Character.Character character)
         {
             Transform place = _model.AddAndReturnPlace(character);
-            character.transform.SetParent(place);
-            character.Move(Vector3.zero);
+            character.AssignToPoint(place);
+        }
+
+        public void AssignToBasePointsAll()
+        {
+            _model.ForEach((character, place) => character.AssignToPoint(place));
+        }
+
+        public void AssignToPointAll(Transform point)
+        {
+            _model.ForEach(character => character.AssignToPoint(point));
         }
 
         public void InvokeForEach(Action<Character.Character> callback)

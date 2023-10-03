@@ -5,14 +5,16 @@ using Random = UnityEngine.Random;
 
 namespace Core.Excavation.Site.View
 {
-    public class ExcavationSiteView : MonoBehaviour
+    public class ExcavationSiteView : MonoBehaviour, ICharacterTarget
     {
         [SerializeField] private float _propsSpawnOffsetX = 5f;
         [SerializeField] private float _propsSpawnOffsetZ = 5f;
 
         public event Action TryMine;
 
-        public void OnTryMine()
+        public Transform GeTransform() => transform;
+
+        public void TryInteract()
         {
             TryMine?.Invoke();
         }

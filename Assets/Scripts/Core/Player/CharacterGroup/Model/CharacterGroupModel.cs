@@ -18,6 +18,7 @@ namespace Core.Player.CharacterGroup.Model
         public Transform AddAndReturnPlace(Character.Character character)
         {
             Transform place = _settings.Places[_charactersPoints.Count];
+
             _charactersPoints.Add(character, place);
             return place;
         }
@@ -32,6 +33,14 @@ namespace Core.Player.CharacterGroup.Model
             foreach ((Character.Character character, Transform _) in _charactersPoints)
             {
                 callback(character);
+            }
+        }
+
+        public void ForEach(Action<Character.Character, Transform> callback)
+        {
+            foreach ((Character.Character character, Transform place) in _charactersPoints)
+            {
+                callback(character, place);
             }
         }
     }

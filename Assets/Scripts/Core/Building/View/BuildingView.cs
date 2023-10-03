@@ -3,11 +3,13 @@ using UnityEngine;
 
 namespace Core.Building.View
 {
-    public class BuildingView : MonoBehaviour
+    public class BuildingView : MonoBehaviour, ICharacterTarget
     {
         public event Action TryBuild;
 
-        public void OnTryBuild()
+        public Transform GeTransform() => transform;
+
+        public void TryInteract()
         {
             TryBuild?.Invoke();
         }

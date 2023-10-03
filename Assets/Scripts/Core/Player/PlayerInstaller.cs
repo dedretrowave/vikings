@@ -1,8 +1,6 @@
 using Core.Character.Helpers;
-using Core.Character.Movement.Presenter;
 using Core.Player.CharacterGroup.Model;
 using Core.Player.CharacterGroup.Presenter;
-using Core.Player.Movement.View;
 using UnityEngine;
 
 namespace Core.Player
@@ -12,25 +10,24 @@ namespace Core.Player
         
         [SerializeField] private CharacterGroupSettings _characterGroupSettings;
         [SerializeField] private CharacterFinder _characterFinder;
+        [SerializeField] private TargetFinder _interactableFinder;
+        [SerializeField] private Character.Character _initialCharacter;
 
-        [SerializeField] private float _moveSpeed = 200f;
-        [SerializeField] private MovementView _movementView;
-        
         private Input.Input _input;
 
         private CharacterGroupPresenter _characterGroup;
-        private MovementPresenter _movement;
 
         public void Construct()
         {
             _input = new();
-
+            
             _characterGroup = new(_characterGroupSettings);
+            _characterGroup.Add(_initialCharacter);
+            InitCharacter(_initialCharacter);
             _characterGroup.InvokeForEach(InitCharacter);
 
-            _movement = new(_movementView, _moveSpeed);
-
-            _input.Move += _movement.Move;
+            _interactableFinder.Found += AssignCharacters;
+            _interactableFinder.Left += ReturnCharacters;
             _characterFinder.Found += AddCharacter;
         }
 
@@ -38,10 +35,21 @@ namespace Core.Player
         {
             _characterGroup.InvokeForEach(DisableCharacter);
             
-            _input.Move -= _movement.Move;
+            _interactableFinder.Found -= AssignCharacters;
+            _interactableFinder.Left -= ReturnCharacters;
             _characterFinder.Found -= AddCharacter;
             
             _input.Disable();
+        }
+
+        private void AssignCharacters(ICharacterTarget site)
+        {
+            _characterGroup.AssignToPointAll(site.GeTransform());
+        }
+
+        private void ReturnCharacters()
+        {
+            _characterGroup.AssignToBasePointsAll();
         }
 
         private void AddCharacter(Character.Character character)

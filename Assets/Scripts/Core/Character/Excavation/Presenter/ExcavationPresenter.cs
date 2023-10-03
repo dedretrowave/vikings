@@ -47,7 +47,7 @@ namespace Core.Character.Excavation.Presenter
                     return;
                 }
                 
-                _currentSite.OnTryMine();
+                _currentSite.TryInteract();
                 await Task.Delay(GlobalSettings.DELAY_BETWEEN_MINE_INTERACTION_IN_MSECS);
                 MineContinuously();
             }

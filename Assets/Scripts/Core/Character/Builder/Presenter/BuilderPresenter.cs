@@ -48,7 +48,7 @@ namespace Core.Character.Builder.Presenter
                     return;
                 }
                 
-                _currentBuilding.OnTryBuild();
+                _currentBuilding.TryInteract();
                 await Task.Delay(GlobalSettings.DELAY_BETWEEN_BUILD_INTERACTION_IN_MSECS);
                 BuildContinuously();
             }

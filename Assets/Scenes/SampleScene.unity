@@ -1456,7 +1456,7 @@ MonoBehaviour:
     _resources:
     - _resource: {fileID: 4446736466661501477, guid: 8f50a9212b37afb439799f4fb21a45b4,
         type: 3}
-      _amount: 3
+      _amount: 5
   _view: {fileID: 871115494}
 --- !u!1 &971285751
 GameObject:

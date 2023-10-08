@@ -33,7 +33,7 @@ namespace Core.Character.Builder.Presenter
 
         private void OnLeft(BuildingView building)
         {
-            if (_currentBuilding.Equals(building))
+            if (_currentBuilding != null && _currentBuilding.Equals(building))
             {
                 _currentBuilding = null;
             }

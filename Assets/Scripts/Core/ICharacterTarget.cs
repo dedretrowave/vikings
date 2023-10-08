@@ -4,7 +4,7 @@ namespace Core
 {
     public interface ICharacterTarget
     {
-        Transform GeTransform();
+        Vector3 GetInteractZone();
         
         void TryInteract();
     }

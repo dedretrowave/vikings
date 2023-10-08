@@ -12,7 +12,10 @@ namespace Core.Excavation.Site.View
 
         public event Action TryMine;
 
-        public Transform GeTransform() => transform;
+        public Vector3 GetInteractZone()
+        {
+            return transform.position;
+        }
 
         public void TryInteract()
         {

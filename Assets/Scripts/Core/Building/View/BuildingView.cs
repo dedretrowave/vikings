@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Core.Building.View
 {
@@ -7,7 +8,10 @@ namespace Core.Building.View
     {
         public event Action TryBuild;
 
-        public Transform GeTransform() => transform;
+        public Vector3 GetInteractZone()
+        {
+            return transform.position;
+        }
 
         public void TryInteract()
         {

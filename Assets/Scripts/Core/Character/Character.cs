@@ -11,7 +11,6 @@ namespace Core.Character
     public class Character : MonoBehaviour
     {
         [Header("Views")]
-        [SerializeField] private float _moveSpeed;
         [SerializeField] private MovementView _movementView;
         [SerializeField] private ExcavationView _excavationView;
         [SerializeField] private BuilderView _builderView;
@@ -22,7 +21,7 @@ namespace Core.Character
 
         private void Awake()
         {
-            _movement = new(_movementView, _moveSpeed);
+            _movement = new(_movementView);
             _excavation = new(_excavationView);
             _builder = new(_builderView);
         }
@@ -31,15 +30,15 @@ namespace Core.Character
         {
             _movement.Move(direction);
         }
-        
-        public void MoveTo(Vector3 point)
+
+        public void MoveToTarget(Vector3 point)
         {
-            _movement.MoveTo(point);
+            _movement.MoveToTargetPoint(point);
         }
 
-        public void AssignToPoint(Transform point)
+        public void MoveToBasePoint(Transform point)
         {
-            _movement.AssignToPoint(point);
+            _movement.MoveToBasePoint(point);
         }
     }
 }

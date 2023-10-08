@@ -11,20 +11,27 @@ namespace Core.Character.Movement.Presenter
         
         private MovementView _view;
 
-        public MovementPresenter(MovementView view, float moveSpeed)
+        public MovementPresenter(MovementView view)
         {
             _model = new();
 
             _view = view;
         }
 
-        public void AssignToPoint(Transform point)
+        public void MoveToBasePoint(Transform point)
         {
             _model.SetBasePoint(point);
+            _model.SetTargetPoint(Vector3.down);
             MoveTo(point.position);
         }
 
-        public void MoveTo(Vector3 point)
+        public void MoveToTargetPoint(Vector3 point)
+        {
+            _model.SetTargetPoint(point);
+            MoveTo(_model.TargetPoint);
+        }
+
+        private void MoveTo(Vector3 point)
         {
             _view.MoveTo(point);
         }
@@ -35,7 +42,13 @@ namespace Core.Character.Movement.Presenter
             
             if (direction == Vector3.zero)
             {
-                MoveTo(_model.BasePoint);
+                if (_model.TargetPoint == Vector3.down)
+                {
+                    MoveTo(_model.BasePoint);
+                    return;
+                }
+                
+                MoveTo(_model.TargetPoint);
             }
         }
     }

@@ -2,6 +2,7 @@ using Core.Character.Helpers;
 using Core.Player.CharacterGroup.Model;
 using Core.Player.CharacterGroup.Presenter;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Core.Player
 {
@@ -10,7 +11,7 @@ namespace Core.Player
         
         [SerializeField] private CharacterGroupSettings _characterGroupSettings;
         [SerializeField] private CharacterFinder _characterFinder;
-        [SerializeField] private TargetFinder _interactableFinder;
+        [SerializeField] private TargetFinder _targetFinder;
         [SerializeField] private Character.Character _initialCharacter;
 
         private Input.Input _input;
@@ -26,8 +27,8 @@ namespace Core.Player
             InitCharacter(_initialCharacter);
             _characterGroup.InvokeForEach(InitCharacter);
 
-            _interactableFinder.Found += AssignCharacters;
-            _interactableFinder.Left += ReturnCharacters;
+            _targetFinder.Found += SetTargetToCharacters;
+            _targetFinder.Left += ReturnCharacters;
             _characterFinder.Found += AddCharacter;
         }
 
@@ -35,21 +36,21 @@ namespace Core.Player
         {
             _characterGroup.InvokeForEach(DisableCharacter);
             
-            _interactableFinder.Found -= AssignCharacters;
-            _interactableFinder.Left -= ReturnCharacters;
+            _targetFinder.Found -= SetTargetToCharacters;
+            _targetFinder.Left -= ReturnCharacters;
             _characterFinder.Found -= AddCharacter;
             
             _input.Disable();
         }
 
-        private void AssignCharacters(ICharacterTarget site)
+        private void SetTargetToCharacters(ICharacterTarget site)
         {
-            _characterGroup.AssignToPointAll(site.GeTransform());
+            _characterGroup.MoveToTargetAll(site.GetInteractZone());
         }
 
         private void ReturnCharacters()
         {
-            _characterGroup.AssignToBasePointsAll();
+            _characterGroup.ReturnToBasePointAll();
         }
 
         private void AddCharacter(Character.Character character)

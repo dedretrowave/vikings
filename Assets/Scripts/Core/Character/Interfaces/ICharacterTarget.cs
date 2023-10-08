@@ -1,10 +1,10 @@
 using UnityEngine;
 
-namespace Core
+namespace Core.Character.Interfaces
 {
     public interface ICharacterTarget
     {
-        Vector3 GetInteractZone();
+        Vector3 GetPosition();
         
         void TryInteract();
     }

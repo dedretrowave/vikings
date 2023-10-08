@@ -10,11 +10,9 @@ namespace Core.Character.Movement.View
         [SerializeField] private float _speed = 200f;
         [SerializeField] private NavMeshAgent _navMeshAgent;
         
-        // private const float TweenMoveSpeed = 1;
         private const float TweenTurnSpeed = .5f;
 
         private Vector3 _direction;
-        // private Vector3 _targetPoint;
         private bool _hasArrived = true;
 
         public void MoveTo(Vector3 point)

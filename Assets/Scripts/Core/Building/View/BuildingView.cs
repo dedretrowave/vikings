@@ -1,4 +1,5 @@
 using System;
+using Core.Character.Interfaces;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,7 +9,7 @@ namespace Core.Building.View
     {
         public event Action TryBuild;
 
-        public Vector3 GetInteractZone()
+        public Vector3 GetPosition()
         {
             return transform.position;
         }

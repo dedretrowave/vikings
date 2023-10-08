@@ -1,8 +1,8 @@
 using Core.Character.Helpers;
+using Core.Character.Interfaces;
 using Core.Player.CharacterGroup.Model;
 using Core.Player.CharacterGroup.Presenter;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Core.Player
 {
@@ -45,7 +45,7 @@ namespace Core.Player
 
         private void SetTargetToCharacters(ICharacterTarget site)
         {
-            _characterGroup.MoveToTargetAll(site.GetInteractZone());
+            _characterGroup.MoveToTargetAll(site.GetPosition());
         }
 
         private void ReturnCharacters()

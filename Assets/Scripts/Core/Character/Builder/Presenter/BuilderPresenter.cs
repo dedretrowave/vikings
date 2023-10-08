@@ -1,38 +1,42 @@
 using System.Threading.Tasks;
 using Core.Building.View;
-using Core.Character.Builder.View;
+using Core.Character.Interfaces;
 
 namespace Core.Character.Builder.Presenter
 {
     public class BuilderPresenter
     {
-        private BuilderView _view;
+        private TargetInteractionView _view;
 
         private BuildingView _currentBuilding;
 
-        public BuilderPresenter(BuilderView view)
+        public BuilderPresenter(TargetInteractionView view)
         {
             _view = view;
 
-            _view.FoundBuilding += OnFound;
-            _view.LeftBuilding += OnLeft;
+            _view.Found += OnFound;
+            _view.Left += OnLeft;
         }
 
         ~BuilderPresenter()
         {
             _currentBuilding = null;
-            _view.FoundBuilding -= OnFound;
-            _view.LeftBuilding -= OnLeft;
+            _view.Found -= OnFound;
+            _view.Left -= OnLeft;
         }
 
-        private void OnFound(BuildingView building)
+        private void OnFound(ICharacterTarget target)
         {
+            if (target is not BuildingView building) return;
+            
             _currentBuilding = building;
             BuildContinuously();
         }
 
-        private void OnLeft(BuildingView building)
+        private void OnLeft(ICharacterTarget target)
         {
+            if (target is not BuildingView building) return;
+            
             if (_currentBuilding != null && _currentBuilding.Equals(building))
             {
                 _currentBuilding = null;

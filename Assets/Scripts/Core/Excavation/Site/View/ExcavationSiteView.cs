@@ -1,4 +1,5 @@
 using System;
+using Core.Character.Interfaces;
 using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -12,7 +13,7 @@ namespace Core.Excavation.Site.View
 
         public event Action TryMine;
 
-        public Vector3 GetInteractZone()
+        public Vector3 GetPosition()
         {
             return transform.position;
         }
